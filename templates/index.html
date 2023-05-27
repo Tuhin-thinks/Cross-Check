@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="shortcut icon"
+            type="image/png"
+            href="{{ url_for('static', filename='/images/favicon.png') }}"
+        />
+        <title>Cross-Check</title>
+    </head>
+
+    <body class="container">
+        <style>
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 95vh;
+
+                font-family: sans-serif;
+                font-size: 2.5rem;
+            }
+
+            .table {
+                border-collapse: collapse;
+                border-spacing: 0;
+                border: 1px solid #ddd;
+                width: max-content;
+            }
+
+            .row {
+                display: table-row;
+            }
+
+            .inline {
+                display: inline-flex;
+                padding: 6px 5px 12px;
+                margin: 0 auto 0;
+            }
+
+            .col {
+                display: table-cell;
+                padding: 6px 12px;
+                border: 1px solid #ddd;
+            }
+
+            .info {
+                margin: 0 1em;
+                background-color: #ddd;
+            }
+        </style>
+
+        <h1>Cross-Check</h1>
+        <p>Random rendering of cross and checks!</p>
+        <div class="table">
+            {% for i_row in range(table_size) %}
+            <div class="row">
+                {% for j_col in range(table_size) %}
+                <div class="col">
+                    {% if true_fields[i_row * table_size + j_col] == true %}
+                    <span class="check">✅</span>
+                    {% else %}
+                    <span class="cross">❌</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row inline">
+            <p class="info">{{true_fields.count(true)}}: True</p>
+            <p class="info">{{true_fields.count(false)}}: False</p>
+        </div>
+    </body>
+</html>
